@@ -12,6 +12,7 @@ import org.example.demo.ticket.business.ManagerFactory;
 import org.example.demo.ticket.business.manager.ProjetManager;
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.exception.NotFoundException;
+import org.example.demo.ticket.webapp.rest.resource.AbstractResource;
 
 
 /**
@@ -34,8 +35,8 @@ public class ProjetResource {
     @GET
     @Path("{id}")
     public Projet get(@PathParam("id") Integer pId) throws NotFoundException {
-        ProjetManager vProjetManager = new ProjetManager();
-        Projet vProjet = managerFactory.getProjetManager().getProjet(pId);
+        ProjetManager vProjetManager = managerFactory.getProjetManager();
+        Projet vProjet = vProjetManager.getProjet(pId);
         return vProjet;
     }
 

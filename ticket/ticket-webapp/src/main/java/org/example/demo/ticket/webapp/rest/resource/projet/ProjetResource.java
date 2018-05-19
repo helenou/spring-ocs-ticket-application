@@ -22,9 +22,8 @@ import org.example.demo.ticket.webapp.rest.resource.AbstractResource;
  */
 @Path("/projets")
 @Produces(MediaType.APPLICATION_JSON)
-public class ProjetResource {
+public class ProjetResource extends AbstractResource {
 
-	private ManagerFactory managerFactory;
     /**
      * Renvoie le {@link Projet} d'identifiant {@code pId}
      *
@@ -35,7 +34,7 @@ public class ProjetResource {
     @GET
     @Path("{id}")
     public Projet get(@PathParam("id") Integer pId) throws NotFoundException {
-        ProjetManager vProjetManager = managerFactory.getProjetManager();
+        ProjetManager vProjetManager = getManagerFactory().getProjetManager();
         Projet vProjet = vProjetManager.getProjet(pId);
         return vProjet;
     }
@@ -48,7 +47,7 @@ public class ProjetResource {
      */
     @GET
     public List<Projet> get() {
-        ProjetManager vProjetManager = new ProjetManager();
+        ProjetManager vProjetManager = getManagerFactory().getProjetManager(); // replaces new ProjectManager();
         List<Projet> vListProjet = vProjetManager.getListProjet();
         return vListProjet;
     }
